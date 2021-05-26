@@ -2,14 +2,14 @@
 import { ConnectionOptions, createConnection } from 'typeorm';
 import express, { Express, Request, Response } from 'express';
 import cors from 'cors';
+import swaggerUi from 'swagger-ui-express';
 
 // Services
 import {
   eventRecordService
 } from '@/service';
-import {
-  eventRecordRoutes
-} from '@/controller';
+// Route generate by tsoa
+import { RegisterRoutes } from '@/routes';
 
 const app = express();
 
@@ -24,13 +24,15 @@ export default function appInit(typeormConfig: ConnectionOptions): Promise<Expre
     app.use(express.urlencoded({ extended: true }));
     app.use(express.json());
 
+    const swaggerHtml = swaggerUi.generateHTML(await import('./swagger.json'));
+    app.use('/docs', swaggerUi.serve, (_:Request, res:Response) => res.send(swaggerHtml));
+
     await createConnection(typeormConfig);
 
     // service init
     eventRecordService.init();
 
-    // controller register
-    eventRecordRoutes(app);
+    RegisterRoutes(app);
 
     return resolve(app);
   })
