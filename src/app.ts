@@ -1,7 +1,6 @@
 // src/app.ts
 import { ConnectionOptions, createConnection } from 'typeorm';
 import express, { Express, Request, Response } from 'express';
-import bodyParser from 'body-parser';
 import cors from 'cors';
 
 // Services
@@ -22,8 +21,8 @@ export default function appInit(typeormConfig: ConnectionOptions): Promise<Expre
       allowedHeaders: ['Content-Type', 'Authorization'],
     }));
     // Use body parser to read sent json payloads
-    app.use(bodyParser.urlencoded({ extended: true }));
-    app.use(bodyParser.json());
+    app.use(express.urlencoded({ extended: true }));
+    app.use(express.json());
 
     await createConnection(typeormConfig);
 

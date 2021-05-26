@@ -9,7 +9,7 @@ services:
       MYSQL_PASSWORD: '123456'
       MYSQL_ROOT_PASSWORD: 'root'
     ports:
-      - "127.0.0.1:3306:3306"
+      - "0.0.0.0:3306:3306"
   phpmyadmin:
     depends_on:
       - mysql

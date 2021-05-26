@@ -5,6 +5,6 @@ import * as prodConfig from './production';
 // extends from production config.
 export default {
   ...prodConfig.default,
-  dropSchema: true,
+  dropSchema: false,
   logging: 'all',
 } as ConnectionOptions;

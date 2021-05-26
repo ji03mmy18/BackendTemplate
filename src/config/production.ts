@@ -7,7 +7,7 @@ import { ConnectionOptions } from 'typeorm';
 
 export default {
   type: 'mysql',
-  host: 'localhost',
+  host: 'node1.yomin.ddns.ms',
   port: 3306,
   username: 'user',
   password: '123456',
